@@ -17,6 +17,7 @@ results='listoffiles.csv'
 csvfiles = []
    
 def grabSubPage(linkUrl):
+    i = 0
     source = requests.get(linkUrl).text
     subpage = BeautifulSoup(source, 'lxml')
     rows = subpage.find_all('tr')
@@ -29,7 +30,8 @@ def grabSubPage(linkUrl):
                     grabSubPage(linkUrl+clink)
                 elif clink[-4:]=='.csv':
                     #print('CSV File :'+linkUrl+clink)
-                    csvfiles.append([linkUrl+clink, clink])
+                    i += 1
+                    csvfiles.append([i, linkUrl+clink, clink])
 
 source = requests.get(toppage).text
 soup = BeautifulSoup (source,'lxml')
