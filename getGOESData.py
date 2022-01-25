@@ -9,6 +9,7 @@ List of files is written into a csv file named results='???'
 from bs4 import BeautifulSoup
 import requests
 import csv
+i = 0
 
 toppage = 'https://satdat.ngdc.noaa.gov/sem/goes/data/full/'
 years =[]
@@ -17,7 +18,7 @@ results='listoffiles.csv'
 csvfiles = []
    
 def grabSubPage(linkUrl):
-    i = 0
+    global i
     source = requests.get(linkUrl).text
     subpage = BeautifulSoup(source, 'lxml')
     rows = subpage.find_all('tr')
